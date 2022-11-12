@@ -22,11 +22,11 @@ function Dashboard(props) {
     //         console.log(err.message);
     //     }
     // }
-    // //get api data
+     //get api data
     const getApiData=async()=>{
         try {
             const url1='http://api.kmhfltest.health.go.ke/api/facilities/facilities/?format=json';
-            const url="";
+            const url="http://localhost:5000/county";
             const response=await fetch(url,{
                 method:'Get'
             }
@@ -44,11 +44,7 @@ function Dashboard(props) {
     <>
         <Navbar/>
         <div className='body' style={{marginTop:"20px", marginLeft:"20px"}}>
-            {/* {Data&&Data.map(data=>(
-                <div>
-                    <p>{data.count}</p>
-                </div>
-            ))} */}
+            
             <div style={{display:"flex"}}><Link to="/" style={{color:'green'}}>Home</Link> <span class="material-symbols-outlined">chevron_right</span> <p>Dashboard</p></div>
         </div>
 
@@ -57,15 +53,39 @@ function Dashboard(props) {
             <div style={{display:"inline-block",flexGrow:"1",marginRight:"10px"}}>
             <form class="d-flex" style={{float:"right",width:"500px", height:"50px"}}>
                 <p style={{fontWeight:"large",marginTop:"10px",marginLeft:"10px"}}>County:</p><br/>
-                    <input className="form-control me-2" type="search" placeholder="Search a facility/CHU" aria-label="Search"/>
-                    <button className="btn btn-outline-dark" type="submit"><span class="material-symbols-outlined">expand_more</span></button>
+
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        County
+                    </a>
+                    <ul class="dropdown-menu">
+                    {Data&&Data.map((data)=>(
+                        <div key={data.key}>
+                            <li>
+                            <a class="dropdown-item" href="#">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {data.name}
+                                </a>
+                                <ul class="dropdown-menu">
+                                <a class="dropdown-item" href="#">hy</a>
+                                </ul>
+                            </a>
+                            </li>
+                        </div>
+                    ))}
+                    </ul>
+                    </li>
+                </ul>
+               
+
             </form>
         </div>
     </div>
         {/* table */}
         <div class="container" style={{marginTop:"50px"}}>
             <div class="row">
-                <div class="col card">
+                <div class="col card" style={{height:'18rem'}}>
                 <div class="card-header" style={{color:'rgb(79, 30, 107)'}}>
                     FACILITY OWNERS
                 </div>
@@ -74,9 +94,10 @@ function Dashboard(props) {
                     <div><p>METRIC</p></div>
                     <div style={{marginLeft:"200px"}}><p>VALUE</p></div>
                 </div>
+                <hr className="dropdown-divider"/>
 
                 </div>
-                <div class="col card">
+                <div class="col card" style={{height:'18rem'}}>
                 <div class="card-header" style={{color:'rgb(79, 30, 107)'}}>
                     FACILITY TYPES
                 </div>
@@ -87,7 +108,7 @@ function Dashboard(props) {
                 </div>
 
                 </div>
-                <div class="col card">
+                <div class="col card" style={{height:'18rem'}}>
                <div class="card-header" style={{color:'rgb(79, 30, 107)'}}>
                     FACLITIES SUMMARY
                 </div>

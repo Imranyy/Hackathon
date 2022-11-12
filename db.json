@@ -1,0 +1,31 @@
+{
+    "county": [{
+        "id": 1,
+        "county": "Nairobi",
+        "Facility": "Kenyatta hospital",
+        "adderss": "South street"
+    }, {
+        "id": 2,
+        "county": "Migori",
+        "email": "Rongo hospital",
+        "adderss": "North street"
+    }, {
+        "id": 3,
+        "name": "Mombasa",
+        "email": "Likoni",
+        "adderss": "East street"
+    }, {
+        "id": 4,
+        "name": "Malindi",
+        "email": "malindi hospital",
+        "adderss": "West street"
+    }],
+    "Facility": [{
+        "id": 1,
+        "body": "some comment",
+        "postId": 1
+    }],
+    "profile": {
+        "name": "typicode"
+    }
+}

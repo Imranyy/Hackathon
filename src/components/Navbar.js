@@ -50,6 +50,7 @@ function Navbar(props) {
                 <input className="form-control me-2" type="search" placeholder="Search a facility/CHU" aria-label="Search"/>
                 <button className="btn btn-outline-dark" type="submit"><span class="material-symbols-outlined">search</span></button>
             </form>
+            
         </nav>
     </>
     );
