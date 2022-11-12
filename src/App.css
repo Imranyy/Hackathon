@@ -4,10 +4,30 @@
   margin: 0;
   font-family: 'Quicksand', sans-serif;
   /* color: rgb(9, 78, 78); */
+  color: rgb(79, 83, 85);
 }
 nav{
   color: rgb(97, 119, 119);
   font-size: large;
   font-weight:900;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}
+nav a:hover{
+  border-bottom: solid 2px green;
+}
+.container .row .col{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.container .row{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+ul{
+  list-style-type: none;
+}
+.footer a{
+  color: rgb(102, 204, 170);
+}
+.footer a:hover{
+  cursor: pointer;
+  color: whitesmoke;
 }
