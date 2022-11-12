@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&family=Rubik+Glitch&display=swap');
+*{
+  padding: 0;
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  /* color: rgb(9, 78, 78); */
+}
+nav{
+  color: rgb(97, 119, 119);
+  font-size: large;
+  font-weight:900;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}
