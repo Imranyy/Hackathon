@@ -39,7 +39,12 @@ function Dashboard(props) {
         </div>
 
         <div style={{display:'flex'}}>
-            <h2 style={{ marginLeft:"20px"}}>Overview</h2>
+            <h2 style={{ marginLeft:"20px"}}>Overview</h2><br/>
+            {Data&&Data.map(item=>(
+                <div><br/>
+                <p>{item.constituency[0AA]}</p><br/>
+                </div>
+            ))}
             <div style={{display:"inline-block",flexGrow:"1",marginRight:"10px"}}>
             <form class="d-flex" style={{float:"right",width:"500px", height:"50px"}}>
                 <p style={{fontWeight:"large",marginTop:"10px",marginLeft:"10px"}}>County:</p><br/>
