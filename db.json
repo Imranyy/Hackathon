@@ -41,7 +41,7 @@
             "value5":68
         }
     ],
-    "Homa Bay":[
+    "Homa%20Bay":[
         {
             "id":1,
             "value1":53,
@@ -51,7 +51,7 @@
             "value5":6
         }
     ],
-    "Elgeyo Marakwet":[
+    "Elgeyo%20Marakwet":[
         {
             "id":1,
             "value1":78,
@@ -89,6 +89,66 @@
             "value3":357,
             "value4":17,
             "value5":64
+        }
+    ],
+    "Vihiga":[
+        {
+            "id":1,
+            "value1":55,
+            "value2": 201,
+            "value3":37,
+            "value4":17,
+            "value5":689
+        }
+    ],
+    "Narok":[
+        {
+            "id":1,
+            "value1":589,
+            "value2": 601,
+            "value3":347,
+            "value4":97,
+            "value5":689
+        }
+    ],
+    "Laikipia":[
+        {
+            "id":1,
+            "value1":47,
+            "value2": 6,
+            "value3":307,
+            "value4":989,
+            "value5":6
+        }
+    ],
+    "Bungoma":[
+        {
+            "id":1,
+            "value1":20,
+            "value2": 65,
+            "value3":27,
+            "value4":978,
+            "value5":89
+        }
+    ],
+    "Busia":[
+        {
+            "id":1,
+            "value1":60,
+            "value2": 200,
+            "value3":402,
+            "value4":500,
+            "value5":84
+        }
+    ],
+    "Uasin%20Gishu":[
+        {
+            "id":1,
+            "value1":450,
+            "value2": 10,
+            "value3":35,
+            "value4":170,
+            "value5":20
         }
     ]
   }
