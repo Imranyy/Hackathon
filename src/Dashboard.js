@@ -173,7 +173,7 @@ function Dashboard(props) {
                     <p style={{marginLeft:"5px"}}>{localStorage.getItem('constituency')} Constituency</p><span class="material-symbols-outlined">chevron_right</span> 
                     <p style={{marginLeft:"5px"}}>{localStorage.getItem('ward')} Ward</p>
                 </div>
-            {filteredData&&filteredData.map((filtered)=>(
+            {filteredData?filteredData.map((filtered)=>(
                 <div key={filtered.id} style={{height:"500px",overflow:'hidden'}}>
                     <div style={{display:"flex"}}><span class="material-symbols-outlined">chevron_right</span>county</div>
                     <div style={{display:"flex",marginLeft:"50px"}}> <span class="material-symbols-outlined">expand_more</span>{filtered.county} </div>
@@ -184,7 +184,8 @@ function Dashboard(props) {
                     <div style={{display:"flex"}}><span class="material-symbols-outlined">chevron_right</span>facilities</div>
                     <div style={{display:"flex",marginLeft:"50px"}}> <span class="material-symbols-outlined">expand_more</span>{filtered.facility_type_name} </div>
                 </div>
-            ))}
+            )):(<p style={{color:"red"}}>Record doesn't exist!</p>)
+            }
         </div>
         <div className='body' style={{marginTop:"20px", marginLeft:"20px"}}>
             
