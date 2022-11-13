@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Navbar(props) {
+    const clear=()=>{
+        localStorage.clear();
+        window.location.reload();
+    }
     return (
     <>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -50,8 +54,8 @@ function Navbar(props) {
                 <input className="form-control me-2" type="search" placeholder="Search a facility/CHU" aria-label="Search"/>
                 <button className="btn btn-outline-dark" type="submit"><span class="material-symbols-outlined">search</span></button>
             </form>
-            
         </nav>
+        <button className='btn btn-dark' style={{marginTop:"20px",float:"right",marginRight:"10px"}} onClick={clear}>Log out</button>
     </>
     );
 }

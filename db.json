@@ -1,0 +1,29 @@
+{
+    "Nairobi": [
+        {
+            "id":1,
+            "value1":103
+        },
+        {
+            "id":2,
+            "Non-Governmental Organizations": 133
+        },
+        {
+            "id":3,
+            "Ministry of Health":35
+        },
+        {
+            "id":4,
+            "Faith Based Organization ":123
+        }
+        
+    ],
+    "comments": [
+      { 
+        "id": 1, 
+        "body": "some comment",
+        "postId": 1 
+    }
+    ],
+    "profile": { "name": "typicode" }
+  }

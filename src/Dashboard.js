@@ -2,9 +2,11 @@ import React, { useState,useEffect } from 'react';
 import Navbar from './components/Navbar';
 import {Link} from "react-router-dom";
 import Footer from './components/Footer';
+import BarChart from './components/BarChart';
 function Dashboard(props) {
     const [Data,setData]=useState([]);
     const [filteredData,setFilteredData]=useState(Data);
+    
     //get token
     //curl -X POST -d "grant_type=password&username=test@testmail.com&password=Test@1234&scope=read" -u"5O1KlpwBb96ANWe27ZQOpbWSF4DZDm4sOytwdzGv:PqV0dHbkjXAtJYhY9UOCgRVi5BzLhiDxGU91kbt5EoayQ5SYOoJBYRYAYlJl2RetUeDMpSvhe9DaQr0HKHan0B9ptVyoLvOqpekiOmEqUJ6HZKuIoma0pvqkkKDU9GPv" https://api.kmhfltest.health.go.ke/o/token/
      //get api data
@@ -14,7 +16,7 @@ function Dashboard(props) {
             const url='http://api.kmhfltest.health.go.ke/api/facilities/facilities/?format=json';
             const url2='https://api.kmhfltest.health.go.ke/api/facilities/facilities/?fields=id,code,official_name,facility_type_name,owner_name,county,sub_county,constituency_name,ward_name,updated,operation_status_name,sub_county_name,name,is_complete,in_complete_details,approved_national_level,has_edits,approved,rejected,keph_level&format=json&is_approved=true';
             const url1='https://api.kmhfltest.health.go.ke/api/common/filtering_summaries/?fields=county,facility_type,constituency,ward,operation_status,service_category,owner_type,owner,service,keph_level,sub_county&format=json';
-            const response=await fetch(url2,{
+            const response=await fetch(url,{
                 method:'Get',
                 headers:{
                     authorization:`bearer ${token}`,
@@ -32,7 +34,22 @@ function Dashboard(props) {
     }
     useEffect(()=>{
         getApiData();
+        getDashboardData();
     },[])
+    
+    const [getDashboard,setDashboard]=useState([]);
+     async function getDashboardData(){
+        try {
+            const url=`http://localhost:5000/Nairobi`
+            const response=await fetch(url,{
+                method:"get"
+            })
+            const res=await response.json();
+            setDashboard(res)
+        } catch (error) {
+            console.log(error.message)
+        }
+     }
     //onChange function that will filtered the json data
     const handleSearch=(e)=>{
         let value = e.target.value;
@@ -59,6 +76,7 @@ function Dashboard(props) {
     }
     //onChange function that will filtered the constituency data
     const handleConstituencyData=(e)=>{
+        showConstituencySelect();
         dontShowSubCountySelect();
         let value = e.target.value;
         localStorage.setItem('subcounty',value);
@@ -71,6 +89,7 @@ function Dashboard(props) {
     }
     //onChange function that will filtered the ward data
     const handleWardData=(e)=>{
+        showWardSelect();
         dontShowConstituencySelect();
         let value = e.target.value;
         localStorage.setItem("constituency",value);
@@ -85,7 +104,7 @@ function Dashboard(props) {
     const handleStoreWard=(e)=>{
         dontShowWardSelect();
         change();
-        let value = e.target.value;
+        const value = e.target.value;
         localStorage.setItem("ward",value);
     }
    const change=()=>{
@@ -136,21 +155,31 @@ function Dashboard(props) {
         const show=document.querySelector('.ward');
         show.style.display="none";
     }
-    
+   
     return (
     <>
         <Navbar/>
-        <div style={{display:"flex",marginTop:"50px"}}>
+        <div className='container' style={{display:"flex",marginTop:"20px"}}>
             <input className="form-control me-2" type="text" onFocus={showCounty} onChange={(e)=>handleSearch(e)} placeholder="Search a facility/CHU" aria-label="Search"/>
-            <span class="material-symbols-outlined right"  onClick={dontShowCounty}>close</span>
+            <button className="btn btn-info"><span class="material-symbols-outlined right" style={{color:"white"}}  onClick={dontShowCounty}>close</span></button>
         </div>
-        <div className='showCounty' style={{display:'none'}}>
-        <p>sub_county</p>
+        <div className='showCounty container card' style={{display:'none', marginTop:"20px", border:'solid 1px gray',height:"250px"}}>
+                <div style={{color:"rgb(79, 30, 107)",fontWeight:"normal",display:"flex",marginLeft:"20px"}}>
+                    <p>{localStorage.getItem('county')} County</p><span class="material-symbols-outlined">chevron_right</span> 
+                    <p style={{marginLeft:"5px"}}>{localStorage.getItem('subcounty')} Sub-county</p> <span class="material-symbols-outlined">chevron_right</span> 
+                    <p style={{marginLeft:"5px"}}>{localStorage.getItem('constituency')} Constituency</p><span class="material-symbols-outlined">chevron_right</span> 
+                    <p style={{marginLeft:"5px"}}>{localStorage.getItem('ward')} Ward</p>
+                </div>
             {filteredData&&filteredData.map((filtered)=>(
-                <div key={filtered.id}>
-                    <p>&rarr;{filtered.county_name}</p>
-                    <p>{filtered.sub_county_name}</p>
-                    <p>{filtered.constituency}</p>
+                <div key={filtered.id} style={{height:"500px",overflow:'hidden'}}>
+                    <div style={{display:"flex"}}><span class="material-symbols-outlined">chevron_right</span>county</div>
+                    <div style={{display:"flex",marginLeft:"50px"}}> <span class="material-symbols-outlined">expand_more</span>{filtered.county} </div>
+                    <div style={{display:"flex"}}><span class="material-symbols-outlined">chevron_right</span>sub-county</div>
+                    <div style={{display:"flex",marginLeft:"50px"}}> <span class="material-symbols-outlined">expand_more</span>{filtered.sub_county_name} </div>
+                    <div style={{display:"flex"}}><span class="material-symbols-outlined">chevron_right</span>Constituency</div>
+                    <div style={{display:"flex",marginLeft:"50px"}}> <span class="material-symbols-outlined">expand_more</span>{filtered.constituency_name} </div>
+                    <div style={{display:"flex"}}><span class="material-symbols-outlined">chevron_right</span>facilities</div>
+                    <div style={{display:"flex",marginLeft:"50px"}}> <span class="material-symbols-outlined">expand_more</span>{filtered.facility_type_name} </div>
                 </div>
             ))}
         </div>
@@ -227,7 +256,8 @@ function Dashboard(props) {
                     <div style={{marginLeft:"200px"}}><p style={{fontWeight:"bold"}}>VALUE</p></div>
                 </div>
                 <hr className="dropdown-divider" style={{marginTop:"-15px"}}/>
-                 <div style={{display:"flex", fontWeight:"bold"}}>
+                 {getDashboard&&getDashboard.map((data)=>(
+                    <div key={data.id} style={{display:"flex", fontWeight:"bold"}}>
                     <div>
                         <ul style={{decoration:'none',marginLeft:"-30px"}}>
                             <li>Private Practice</li>
@@ -238,7 +268,7 @@ function Dashboard(props) {
                         </div>
                         <div>
                         <ul style={{decoration:'none',marginRight:"50px"}}>
-                            <li>103</li>
+                            <li>{data.value1}</li>
                             <li>133</li>
                             <li>35</li>
                             <li>123</li>
@@ -246,6 +276,7 @@ function Dashboard(props) {
                         </ul>
                     </div>
                  </div>
+                 ))}
                 </div><br/>
 
                 {/* col2 */}
@@ -428,7 +459,7 @@ function Dashboard(props) {
                     FACILITIES & CHUS BY COUNTY
                     </div><br/>
                     <div className='card' style={{height:'18rem',marginBottom:'20px'}}>
-                        
+                        <BarChart/>
                     </div>
                 </div>
             </div>
