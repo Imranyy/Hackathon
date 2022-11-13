@@ -12,7 +12,7 @@ function Dashboard(props) {
      //get api data
     const getApiData=async()=>{
         try {
-            const token="76TPD7ooix8DVEa9I6FLE9GKOMLwyE";
+            const token="VzXEiEFMkGvpclZJZwOtAY6EYkUL4f";
             const url='http://api.kmhfltest.health.go.ke/api/facilities/facilities/?format=json';
             const url2='https://api.kmhfltest.health.go.ke/api/facilities/facilities/?fields=id,code,official_name,facility_type_name,owner_name,county,sub_county,constituency_name,ward_name,updated,operation_status_name,sub_county_name,name,is_complete,in_complete_details,approved_national_level,has_edits,approved,rejected,keph_level&format=json&is_approved=true';
             const url1='https://api.kmhfltest.health.go.ke/api/common/filtering_summaries/?fields=county,facility_type,constituency,ward,operation_status,service_category,owner_type,owner,service,keph_level,sub_county&format=json';
@@ -33,19 +33,21 @@ function Dashboard(props) {
         }
     }
     useEffect(()=>{
-        getApiData();
         getDashboardData();
+        getApiData();
     },[])
     
-    const [getDashboard,setDashboard]=useState([]);
+    const [getDashboard,setDashboard]=useState('');
+
      async function getDashboardData(){
         try {
-            const url=`http://localhost:5000/Nairobi`
+            const url=`http://localhost:5000/${localStorage.getItem('county')}`;
             const response=await fetch(url,{
                 method:"get"
             })
             const res=await response.json();
             setDashboard(res)
+            console.log(res)
         } catch (error) {
             console.log(error.message)
         }
@@ -102,6 +104,7 @@ function Dashboard(props) {
     }
     // //onChange function that will filtered the county data
     const handleStoreWard=(e)=>{
+        window.location.reload();
         dontShowWardSelect();
         change();
         const value = e.target.value;
@@ -230,7 +233,7 @@ function Dashboard(props) {
                         ))}
                     </select>
                     {/* county select */}
-                    <select class="form-select form-select-sm county"  onChange={e=>handleSubCountyData(e)}    aria-label=".form-select-sm example">
+                    <select class="form-select form-select-sm county"  onChange={e=>handleSubCountyData(e)}   aria-label=".form-select-sm example">
                     <option style={{fontWeight:"bold"}} selected>Select county</option><br/>
                         {Data&&Data.map((data)=>(
                             <>
@@ -260,21 +263,12 @@ function Dashboard(props) {
                     <div key={data.id} style={{display:"flex", fontWeight:"bold"}}>
                     <div>
                         <ul style={{decoration:'none',marginLeft:"-30px"}}>
-                            <li>Private Practice</li>
-                            <li>Non-Governmental Organizations</li>
-                            <li>Ministry of Health</li>
-                            <li>Faith Based Organization</li>
+                            <li><div style={{display:'flex'}}>Private Practice    <div style={{marginLeft:"150px"}}>{data.value1}</div></div> </li>
+                            <li><div style={{display:"flex"}}>Non-Governmental Organizations  <div style={{marginLeft:"10px"}}>{data.value2}</div></div></li>
+                            <li><div style={{display:"flex"}}>Ministry of Health  <div style={{marginLeft:"140px"}}>{data.value3}</div></div></li>
+                            <li><div style={{display:"flex"}}>Faith Based Organization <div style={{marginLeft:"80px"}}>{data.value4}</div></div></li>
                         </ul>
                         </div>
-                        <div>
-                        <ul style={{decoration:'none',marginRight:"50px"}}>
-                            <li>{data.value1}</li>
-                            <li>133</li>
-                            <li>35</li>
-                            <li>123</li>
-                            <li>22</li>
-                        </ul>
-                    </div>
                  </div>
                  ))}
                 </div><br/>
@@ -304,13 +298,17 @@ function Dashboard(props) {
                         </div>
                         <div>
                         <ul style={{decoration:'none',marginLeft:"70px"}}>
-                            <li>475</li>
-                            <li>358</li>
-                            <li>33</li>
-                            <li>312</li>
-                            <li>333</li>
-                            <li>345</li>
-                            <li>45</li>
+                        {getDashboard&&getDashboard.map((data)=>(
+                                <div key={data.id}>
+                                    <li>{data.value5}</li>
+                                    <li>{data.value1}</li>
+                                    <li>{data.value2}</li>
+                                    <li>{data.value4}</li>
+                                    <li>{data.value1}</li>
+                                    <li>{data.value2}</li>
+                                    <li>{data.value3}</li>
+                                </div>
+                            ))}
                         </ul>
                     </div>
                  </div>
@@ -339,17 +337,22 @@ function Dashboard(props) {
                         </div>
                         <div>
                         <ul style={{decoration:'none',marginLeft:"30px"}}>
-                            <li>0</li>
-                            <li>24</li>
-                            <li>100</li>
-                            <li>6</li>
-                            <li>0</li>
+                        {getDashboard&&getDashboard.map((data)=>(
+                                <div key={data.id}>
+                                    <li>{data.value5}</li>
+                                    <li>{data.value3}</li>
+                                    <li>{data.value4}</li>
+                                    <li>{data.value3}</li>
+                                    <li>{data.value1}</li>
+                                </div>
+                            ))}
                         </ul>
                     </div>
                  </div>
                 </div>
             </div>
         </div>
+        
 
         {/* table2 */}
         <div class="container" style={{marginTop:"50px"}}>
@@ -376,10 +379,14 @@ function Dashboard(props) {
                         </div>
                         <div>
                         <ul style={{decoration:'none',marginRight:"30px"}}>
-                            <li>586</li>
-                            <li>234</li>
-                            <li>0</li>
-                            <li>1</li>
+                            {getDashboard&&getDashboard.map((data)=>(
+                                <div key={data.id}>
+                                    <li>{data.value5}</li>
+                                    <li>{data.value2}</li>
+                                    <li>{data.value2}</li>
+                                    <li>{data.value3}</li>
+                                </div>
+                            ))}
                         </ul>
                     </div>
                  </div>
@@ -407,10 +414,14 @@ function Dashboard(props) {
                         </div>
                         <div>
                         <ul style={{listStyle:'none',marginLeft:"90px"}}>
-                            <li>34</li>
-                            <li>56</li>
-                            <li>78</li>
-                            <li>122</li>
+                        {getDashboard&&getDashboard.map((data)=>(
+                                <div key={data.id}>
+                                    <li>{data.value5}</li>
+                                    <li>{data.value1}</li>
+                                    <li>{data.value2}</li>
+                                    <li>{data.value3}</li>
+                                </div>
+                            ))}
                         </ul>
                     </div>
                  </div>
@@ -430,20 +441,24 @@ function Dashboard(props) {
                 <div style={{display:"flex",fontWeight:'bold'}}>
                     <div>
                         <ul style={{listStyle:'none',marginLeft:"-30px"}}>
-                            <li>Level 6</li>
-                            <li>Level 5</li>
-                            <li>Level 4</li>
-                            <li>Level 3</li>
-                            <li>Level 2</li>
+                            <li>Level </li>
+                            <li>Level </li>
+                            <li>Level </li>
+                            <li>Level </li>
+                            <li>Level </li>
                         </ul>
                         </div>
                         <div>
                         <ul style={{listStyle:'none',marginLeft:"200px"}}>
-                            <li>6</li>
-                            <li>5</li>
-                            <li>4</li>
-                            <li>3</li>
-                            <li>2</li>
+                        {getDashboard&&getDashboard.map((data)=>(
+                                <div key={data.id}>
+                                    <li>{data.value5}</li>
+                                    <li>{data.value1}</li>
+                                    <li>{data.value2}</li>
+                                    <li>{data.value3}</li>
+                                    <li>{data.value4}</li>
+                                </div>
+                            ))}
                         </ul>
                     </div>
                  </div>
@@ -458,9 +473,11 @@ function Dashboard(props) {
                     <div class="card-header" style={{fontSize:'18px',fontWeight:"bolder",color:'rgb(79, 30, 107)',background:'#f2f2f2'}}>
                     FACILITIES & CHUS BY COUNTY
                     </div><br/>
-                    <div className='card' style={{height:'18rem',marginBottom:'20px'}}>
-                        <BarChart/>
+                    {getDashboard&&getDashboard.map((data)=>(
+                        <div className='card' style={{height:'35rem',marginBottom:'20px'}}>
+                        <BarChart props={data.value5} props2={data.value2}/>
                     </div>
+                    ))}
                 </div>
             </div>
         </div>    
@@ -473,10 +490,11 @@ function Dashboard(props) {
                 <div class="card-header" style={{fontSize:'18px',fontWeight:"bolder",color:'rgb(79, 30, 107)',background:'#f2f2f2'}}>
                     FACILITY OWNERS
                 </div><br/>
-                    <div className='card' style={{height:'18rem',marginBottom:'20px'}}>
-                        
-                        
+                {getDashboard&&getDashboard.map((data)=>(
+                        <div className='card' style={{height:'35rem',marginBottom:'20px'}}>
+                        <BarChart props={data.value3} props2={data.value2}/>
                     </div>
+                    ))}
                 </div>
 
                 {/* col2 */}
@@ -484,10 +502,11 @@ function Dashboard(props) {
                 <div class="card-header" style={{fontSize:'18px',fontWeight:"bolder",color:'rgb(79, 30, 107)',background:'#f2f2f2'}}>
                     FACILITY TYPES
                 </div><br/>
-                    <div className='card' style={{height:'18rem',marginBottom:'20px'}}>
-                        
-                        
+                {getDashboard&&getDashboard.map((data)=>(
+                        <div className='card' style={{height:'35rem',marginBottom:'20px'}}>
+                        <BarChart props={data.value4} props2={data.value2}/>
                     </div>
+                    ))}
                 </div>
             </div>
         </div>

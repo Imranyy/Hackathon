@@ -1,29 +1,94 @@
 {
+    "null": [
+        {
+            "id":1,
+            "value1":0,
+            "value2": 0,
+            "value3":0,
+            "value4":0,
+            "value5":0
+        }
+    ],
     "Nairobi": [
         {
             "id":1,
-            "value1":103
-        },
-        {
-            "id":2,
-            "Non-Governmental Organizations": 133
-        },
-        {
-            "id":3,
-            "Ministry of Health":35
-        },
-        {
-            "id":4,
-            "Faith Based Organization ":123
+            "value1":103,
+            "value2": 133,
+            "value3":35,
+            "value4":123,
+            "value5":56
         }
-        
     ],
-    "comments": [
-      { 
-        "id": 1, 
-        "body": "some comment",
-        "postId": 1 
-    }
+    "Migori":[
+        {
+            "id":1,
+            "value1":0,
+            "value2": 150,
+            "value3":351,
+            "value4":1267,
+            "value5":67,
+            "value6":8
+        }
+
     ],
-    "profile": { "name": "typicode" }
+    "Kiambua":[
+        {
+            "id":1,
+            "value1":5,
+            "value2": 15,
+            "value3":35,
+            "value4":1,
+            "value5":68
+        }
+    ],
+    "Homa Bay":[
+        {
+            "id":1,
+            "value1":53,
+            "value2": 104,
+            "value3":35,
+            "value4":12,
+            "value5":6
+        }
+    ],
+    "Elgeyo Marakwet":[
+        {
+            "id":1,
+            "value1":78,
+            "value2": 1,
+            "value3":356,
+            "value4":1989,
+            "value5":6
+        }
+    ],
+    "Kisumu":[
+        {
+            "id":1,
+            "value1":45,
+            "value2": 14,
+            "value3":3,
+            "value4":1,
+            "value5":667
+        }
+    ],
+    "Nyamira":[
+        {
+            "id":1,
+            "value1":12,
+            "value2": 105,
+            "value3":351,
+            "value4":167,
+            "value5":623
+        }
+    ],
+    "Kisii":[
+        {
+            "id":1,
+            "value1":45,
+            "value2": 108,
+            "value3":357,
+            "value4":17,
+            "value5":64
+        }
+    ]
   }

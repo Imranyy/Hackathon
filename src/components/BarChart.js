@@ -17,17 +17,16 @@ ChartJS.register(
     Legend
   );
 
-function BarChart() {
+function BarChart({props,props2}) {
     const state = {
-        labels: ['January', 'February', 'March',
-            'April', 'May','June','July','August','September','October','November','December'],
+        labels: [`${localStorage.getItem('county')} County Facilities`,`${localStorage.getItem('county')} CHU`],
         datasets: [
             {
-                label: 'Average Salary Amount USD($)',
+                label: 'FACILITIES & CHUS BY COUNTY',
                 backgroundColor: 'rgba(75,192,192,1)',
                 borderColor: 'rgba(0,0,0,1)',
                 borderWidth: 2,
-                data: [34, 65, 78, 89, 35,56,66,84,21,67,87,78],
+                data: [props,props2],
             }
         ]
     }
@@ -38,7 +37,7 @@ data={state}
 options={{
     title:{
         display:true,
-        text:'Average Employee Salary per Month',
+        text:'FACILITIES & CHUS BY COUNTY',
         fontSize:20
     },
     legend:{
