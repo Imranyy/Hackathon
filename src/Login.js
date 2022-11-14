@@ -17,6 +17,8 @@ function Login(props) {
             const url='https://api.kmhfltest.health.go.ke/o/token/';
             const response=await fetch(url,{
                 method:"POST",
+                //grant_type=password&username=&password=&scope=read
+                //grant_type=password&username=test@testmail.com&password=Test@1234&scope=read
                 body: `grant_type=password&username=${username}&password=${password}&scope=read`,
                 //body:`grant_type=client_credentials&client_id=${client_id}&client_secret=${client_secret}`,
                 headers:{
