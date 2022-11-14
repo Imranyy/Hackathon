@@ -23,6 +23,21 @@ nav a:hover{
 ul{
   list-style-type: none;
 }
+.login{
+  display: flex;
+  background-color:rgba(239,246,255);
+  width: 100%;
+  height: 100vh;
+}
+.login-form{
+  margin-left: 20%;
+  margin-top:10vh;
+  width: 80%;
+}
+.login-form .card{
+  background-color: white;
+  width: 70%;
+}
 .footer a{
   color: rgb(102, 204, 170);
 }

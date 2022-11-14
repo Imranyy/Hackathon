@@ -14,6 +14,7 @@ function Dashboard(props) {
         try {
             const token="VzXEiEFMkGvpclZJZwOtAY6EYkUL4f";
             const url='http://api.kmhfltest.health.go.ke/api/facilities/facilities/?format=json';
+            const url3="http://api.kmhfltest.health.go.ke/api/facilities/facilities/536b8721-d814-431d-964f-01765e60028c/?format=json";
             const url2='https://api.kmhfltest.health.go.ke/api/facilities/facilities/?fields=id,code,official_name,facility_type_name,owner_name,county,sub_county,constituency_name,ward_name,updated,operation_status_name,sub_county_name,name,is_complete,in_complete_details,approved_national_level,has_edits,approved,rejected,keph_level&format=json&is_approved=true';
             const url1='https://api.kmhfltest.health.go.ke/api/common/filtering_summaries/?fields=county,facility_type,constituency,ward,operation_status,service_category,owner_type,owner,service,keph_level,sub_county&format=json';
             const response=await fetch(url,{
