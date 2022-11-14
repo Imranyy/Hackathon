@@ -11,6 +11,8 @@ function Login(props) {
         e.preventDefault();
         const form=document.querySelector('.form');
         try {
+            //const passCode=`${window.btoa(username)}:${window.btoa(password)}`;
+            const passCode=`${window.btoa('5O1KlpwBb96ANWe27ZQOpbWSF4DZDm4sOytwdzGv:PqV0dHbkjXAtJYhY9UOCgRVi5BzLhiDxGU91kbt5EoayQ5SYOoJBYRYAYlJl2RetUeDMpSvhe9DaQr0HKHan0B9ptVyoLvOqpekiOmEqUJ6HZKuIoma0pvqkkKDU9GPv')}`;
             const  client_id="lhRuA5CuWRqB9diSH2xaLx44V4C5rnvlHk5ybOaE";
             const client_secret="LC4L2x8Ml2Ox5lgFC00sdkqHGUieMDcCLkxGOlIst8Z2tVO4V1D5FcGtYjmecjvG8V7mY5YA9Yi4XgBNliqOGJWwn8Af5s71DB0HjoFb1lYSFbFAYGInbuSYCE2OsJkU";
             setLoginButton(<button className='btn btn-dark container' disabled><i>Login . . .</i></button>)
@@ -22,15 +24,16 @@ function Login(props) {
                 body: `grant_type=password&username=${username}&password=${password}&scope=read`,
                 //body:`grant_type=client_credentials&client_id=${client_id}&client_secret=${client_secret}`,
                 headers:{
-                    "content-type":"application/x-www-form-urlencoded"
+                    "content-type":"application/x-www-form-urlencoded",
+                    Authorization:`Basic ${passCode}`
                 }
             })
             const parseRes=await response.json();
             console.log(parseRes);
+            localStorage.setItem('access_token',parseRes.access_token);
             //redirect to dashboard
-            if(localStorage.getItem('token')){
-                navigate('/dashboard');
-            }
+            //navigate('/dashboard');
+            window.location.reload();
             setLoginButton(<button className='btn btn-success container'>Login</button>);
         } catch (error) {
             form.reset();
