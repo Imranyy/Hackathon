@@ -55,7 +55,7 @@ function Navbar(props) {
                 <button className="btn btn-outline-dark" type="submit"><span class="material-symbols-outlined">search</span></button>
             </form>
         </nav>
-        <button className='btn btn-dark' style={{marginTop:"20px",float:"right",marginRight:"10px"}} onClick={clear}>Reset</button>
+        <button className='btn btn-dark' style={{marginTop:"20px",float:"right",marginRight:"10px"}} onClick={clear}>Log Out</button>
     </>
     );
 }

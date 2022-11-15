@@ -4,7 +4,7 @@ import Dashboard from './Dashboard';
 import Login from './Login';
 
 function App() {
-  const auth=localStorage.getItem('access_token');
+  const auth=localStorage.getItem('token');
   return (
   <Router>
       <Routes>
