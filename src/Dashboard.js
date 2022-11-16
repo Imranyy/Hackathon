@@ -105,21 +105,21 @@ function Dashboard(props) {
             }
      }        
     //onChange function that will filtered the json data
-    function handleSearch(){
+    function handleSearch(e){
+        e.preventDefault();
         setSearchBtn(
             <>
-                <button className="btn btn-info"><span class="material-symbols-outlined right" style={{color:"white"}}  onClick={dontShowCounty}>close</span></button>
+                <a href='#' onClick={dontShowCounty} className="btn btn-info"><span class="material-symbols-outlined right" style={{color:"white"}}>close</span></a>
             </>
         )
         showCounty();
-        console.log(searchFacilty)
         let value = searchFacilty;
+        value=value.charAt(0).toUpperCase()+ value.slice(1);//convert the first letter to uppercase and combines it with the rest in the string
         let result = [];
         result = Data.filter;
         result = Data.filter((data) => {
         return data.county.search(value) !== -1; //filtered the county data
         });
-        console.log(value)
         setFilteredDropData(result);
         // if(value==Data.county){
         //     }else if(value==Data.sub_county_name){
@@ -249,10 +249,11 @@ function Dashboard(props) {
     }
     const dontShowCounty=()=>{
         const show=document.querySelector('.showCounty');
+        document.querySelector('form').reset();
         show.style.display="none";
         setSearchBtn(
         <>
-            <button className="btn btn-success"><span class="material-symbols-outlined right" style={{color:"white"}}  onClick={handleSearch}>search</span></button>
+            <button className="btn btn-success" type='submit'><span class="material-symbols-outlined right" style={{color:"white"}}  onClick={handleSearch}>search</span></button>
         </>
         )
     }
@@ -297,7 +298,7 @@ function Dashboard(props) {
     <>
         <Navbar/>
         <div className='container' style={{display:"flex",marginTop:"20px"}}>
-            <form onSubmit={handleSearch}>
+            <form class="d-flex" style={{width:"99%"}} onSubmit={handleSearch}>
             <input className="form-control me-2" type="text" onChange={(e)=>setSearchFacility(e.target.value)} placeholder="Search a facility/CHU" aria-label="Search"/>
             {searchBtn}
             </form>

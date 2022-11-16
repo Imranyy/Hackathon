@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 function Login(props) {   
-    const navigate=useNavigate();
     const [seepassword,setSeePassword]=useState(<input type="password" className='form-control me-2' onChange={(e) => setPassword(e.target.value)} placeholder='********' required />);
     const [error,setError]=useState('');
     const [username,setUsername]=useState('');
@@ -13,8 +12,8 @@ function Login(props) {
         try {
             //const passCode=`${window.btoa(username)}:${window.btoa(password)}`;
             const passCode=`${window.btoa('5O1KlpwBb96ANWe27ZQOpbWSF4DZDm4sOytwdzGv:PqV0dHbkjXAtJYhY9UOCgRVi5BzLhiDxGU91kbt5EoayQ5SYOoJBYRYAYlJl2RetUeDMpSvhe9DaQr0HKHan0B9ptVyoLvOqpekiOmEqUJ6HZKuIoma0pvqkkKDU9GPv')}`;
-            const  client_id="lhRuA5CuWRqB9diSH2xaLx44V4C5rnvlHk5ybOaE";
-            const client_secret="LC4L2x8Ml2Ox5lgFC00sdkqHGUieMDcCLkxGOlIst8Z2tVO4V1D5FcGtYjmecjvG8V7mY5YA9Yi4XgBNliqOGJWwn8Af5s71DB0HjoFb1lYSFbFAYGInbuSYCE2OsJkU";
+            // const  client_id="lhRuA5CuWRqB9diSH2xaLx44V4C5rnvlHk5ybOaE";
+            // const client_secret="LC4L2x8Ml2Ox5lgFC00sdkqHGUieMDcCLkxGOlIst8Z2tVO4V1D5FcGtYjmecjvG8V7mY5YA9Yi4XgBNliqOGJWwn8Af5s71DB0HjoFb1lYSFbFAYGInbuSYCE2OsJkU";
             setLoginButton(<button className='btn btn-dark container' disabled><i>Loading . . .</i></button>)
             const url='https://api.kmhfltest.health.go.ke/o/token/';
             const response=await fetch(url,{
@@ -32,7 +31,6 @@ function Login(props) {
             console.log(parseRes);
             sessionStorage.setItem('token',parseRes.access_token);
             //redirect to dashboard
-            //navigate('/dashboard');
             window.location.reload();
             setLoginButton(<button className='btn btn-success container'>Login</button>);
         } catch (error) {
