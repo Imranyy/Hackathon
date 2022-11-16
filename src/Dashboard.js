@@ -111,7 +111,7 @@ function Dashboard(props) {
         showSubCountySelect();
         let value = e.target.value;
         getDashboardData(value);
-        localStorage.setItem('county',value);
+        localStorage.setItem('County',value);
         let result = [];
         result = Data.filter;
         result = Data.filter((data) => {
@@ -125,7 +125,7 @@ function Dashboard(props) {
         dontShowSubCountySelect();
         let value = e.target.value;
         getDashboardData(value);
-        localStorage.setItem('subcounty',value);
+        localStorage.setItem('Subcounty',value);
         let result = [];
         result = Data.filter;
         result = Data.filter((data) => {
@@ -139,7 +139,7 @@ function Dashboard(props) {
         dontShowConstituencySelect();
         let value = e.target.value;
         getDashboardData(value);
-        localStorage.setItem("constituency",value);
+        localStorage.setItem("Constituency",value);
         let result = [];
         result = Data.filter;
         result = Data.filter((data) => {
@@ -154,7 +154,7 @@ function Dashboard(props) {
         // window.location.reload();
         dontShowWardSelect();
         change();
-        localStorage.setItem("ward",value);
+        localStorage.setItem("Ward",value);
     }
    const change=()=>{
     showCountySelect()
@@ -220,16 +220,16 @@ function Dashboard(props) {
                     <p style={{marginLeft:"5px"}}>{localStorage.getItem('ward')} Ward</p>
                 </div>
             {filteredData?filteredData.map((filtered)=>(
-                <div key={filtered.id} >
-                    {/* <div style={{display:"flex"}}><span class="material-symbols-outlined">chevron_right</span>county</div>
-                    <div style={{display:"flex",marginLeft:"50px"}}> <span class="material-symbols-outlined">expand_more</span>{filtered.county} </div> */}
+                <div key={filtered.county} >
                     <hr/>
+                    <div style={{display:"flex"}}><span class="material-symbols-outlined">chevron_right</span>County</div>
+                    <div style={{display:"flex",marginLeft:"50px"}}> <span class="material-symbols-outlined">expand_more</span>{filtered.county} </div>
                     <div style={{display:"flex"}}><span class="material-symbols-outlined">chevron_right</span>Sub-county</div>
                     <div style={{display:"flex",marginLeft:"50px"}}> <span class="material-symbols-outlined">expand_more</span>{filtered.sub_county_name} </div>
                     <div style={{display:"flex"}}><span class="material-symbols-outlined">chevron_right</span>Constituency</div>
                     <div style={{display:"flex",marginLeft:"50px"}}> <span class="material-symbols-outlined">expand_more</span>{filtered.constituency_name} </div>
                     <div style={{display:"flex"}}><span class="material-symbols-outlined">chevron_right</span>Facility Type</div>
-                    <div style={{display:"flex",marginLeft:"50px"}}> <span class="material-symbols-outlined">expand_more</span>{filtered.facility_type_name} </div>
+                    <div key={filtered.id} style={{display:"flex",marginLeft:"50px"}}> <span class="material-symbols-outlined">expand_more</span>{filtered.facility_type_name} </div>
                 </div>
             )):(<p style={{color:"red"}}>Record doesn't exist!</p>)
             }
@@ -308,10 +308,10 @@ function Dashboard(props) {
                 </div>
                 <hr className="dropdown-divider" style={{marginTop:"-15px"}}/>
                  {filteredData&&filteredData.map((data)=>(
-                    <div key={data.id} style={{display:"flex", fontWeight:"bold"}}>
+                    <div key={data.d} style={{display:"flex", fontWeight:"bold"}}>
                     <div>
                         <ul style={{decoration:'none',marginLeft:"-30px"}}>
-                            <li><div style={{display:'flex'}}>Private Practice    <div style={{marginLeft:"150px"}}>{data.county}</div></div> </li>
+                            <li><div style={{display:'flex'}}>Private Practice    <div style={{marginLeft:"150px"}}>{data.value1}</div></div> </li>
                             <li><div style={{display:"flex"}}>Non-Governmental Organizations  <div style={{marginLeft:"10px"}}>{data.value2}</div></div></li>
                             <li><div style={{display:"flex"}}>Ministry of Health  <div style={{marginLeft:"140px"}}>{data.value3}</div></div></li>
                             <li><div style={{display:"flex"}}>Faith Based Organization <div style={{marginLeft:"80px"}}>{data.value4}</div></div></li>
