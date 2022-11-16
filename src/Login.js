@@ -30,7 +30,7 @@ function Login(props) {
             })
             const parseRes=await response.json();
             console.log(parseRes);
-            localStorage.setItem('token',parseRes.access_token);
+            sessionStorage.setItem('token',parseRes.access_token);
             //redirect to dashboard
             //navigate('/dashboard');
             window.location.reload();

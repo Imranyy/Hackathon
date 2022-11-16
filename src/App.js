@@ -5,7 +5,7 @@ import Login from './Login';
 import Map from './Map';
 
 function App() {
-  const auth=localStorage.getItem('token');
+  const auth=sessionStorage.getItem('token');
   return (
   <Router>
       <Routes>

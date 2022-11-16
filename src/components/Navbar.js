@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Navbar(props) {
     const clear=()=>{
+        sessionStorage.removeItem('token');
         localStorage.clear();
         window.location.reload();
     }
@@ -29,7 +30,7 @@ function Navbar(props) {
                 <Link to="/" class="nav-link active" aria-current="page">Users</Link>
                 </li>
                 <li class="nav-item">
-                <Link to="/" class="nav-link active" aria-current="page">GIS</Link>
+                <Link to="/map" class="nav-link active" aria-current="page">GIS</Link>
                 </li>
                 <li class="nav-item">
                 <Link to="/" class="nav-link active" aria-current="page">System setup</Link>
@@ -47,15 +48,12 @@ function Navbar(props) {
                 <li class="nav-item">
                 <Link to="/" class="nav-link disabled" href="#" tabindex="-1" >Admin Offices</Link>
                 </li>
+                
             </ul>
+                    <button className='btn btn-dark' onClick={clear}>Log Out</button>
             </div>
         </div>
-            <form class="d-flex" style={{marginTop:"20px",}}>
-                <input className="form-control me-2" type="search" placeholder="Search a facility/CHU" aria-label="Search"/>
-                <button className="btn btn-outline-dark" type="submit"><span class="material-symbols-outlined">search</span></button>
-            </form>
         </nav>
-        <button className='btn btn-dark' style={{marginTop:"20px",float:"right",marginRight:"10px"}} onClick={clear}>Log Out</button>
     </>
     );
 }

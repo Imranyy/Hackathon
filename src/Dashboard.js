@@ -6,13 +6,27 @@ import BarChart from './components/BarChart';
 function Dashboard(props) {
     const [Data,setData]=useState([]);
     const [filteredData,setFilteredData]=useState(Data);
+    // dashboard
+    const [facilitySummary,setFacilitySummary]=useState([]);
+    const [facilityOwner,setFacilityOwner]=useState([]);
+    const [facilityType,setFacilityType]=useState([]);
+    const [communityUnitsSummary,setCommunityUnitsSummary]=useState([]);
+    const [recentChanges,setRecentChanges]=useState([]);
+    const [facilityKephlevel,setFacilityKephLevel]=useState([]);
+    const [filteredDropData,setFilteredDropData]=useState([]);
+    const [searchFacilty,setSearchFacility]=useState('');
+    const [searchBtn,setSearchBtn]=useState(
+        <>
+            <button className="btn btn-success" type="submit"><span class="material-symbols-outlined right" style={{color:"white"}}>search</span></button>
+        </>
+    );
     
     //get token
     //curl -X POST -d "grant_type=password&username=test@testmail.com&password=Test@1234&scope=read" -u"5O1KlpwBb96ANWe27ZQOpbWSF4DZDm4sOytwdzGv:PqV0dHbkjXAtJYhY9UOCgRVi5BzLhiDxGU91kbt5EoayQ5SYOoJBYRYAYlJl2RetUeDMpSvhe9DaQr0HKHan0B9ptVyoLvOqpekiOmEqUJ6HZKuIoma0pvqkkKDU9GPv" https://api.kmhfltest.health.go.ke/o/token/
      //get api data
     const getApiData=async()=>{
         try {
-            const token=localStorage.getItem('token');
+            const token=sessionStorage.getItem('token');
             const url='http://api.kmhfltest.health.go.ke/api/facilities/facilities/?format=json&page_size=300';
             const url3="http://api.kmhfltest.health.go.ke/api/facilities/facilities/536b8721-d814-431d-964f-01765e60028c/?format=json";
             const url2='https://api.kmhfltest.health.go.ke/api/facilities/facilities/?fields=id,code,official_name,facility_type_name,owner_name,county,sub_county,constituency_name,ward_name,updated,operation_status_name,sub_county_name,name,is_complete,in_complete_details,approved_national_level,has_edits,approved,rejected,keph_level&format=json&is_approved=true';
@@ -28,7 +42,6 @@ function Dashboard(props) {
             setData(parseRes.results);
             setFilteredData(parseRes.results)
             console.log(parseRes.results)
-            console.log(parseRes)
         } catch (error) {
             console.log("Error: ",error.message)
         }
@@ -46,62 +59,94 @@ function Dashboard(props) {
                 r=Data.filter((d)=>{
                     return d.county.search(value)!==-1;
                 })
-                setFilteredData(r)
+                setFilteredData(r);
+                setFacilityOwner(r);
+                setFacilitySummary(r);
+                setFacilityType(r);
+                setCommunityUnitsSummary(r);
+                setRecentChanges(r);
+                setFacilityKephLevel(r);
             }else if(value==Data.sub_county_name){
                 r=Data.filter;
                 r=Data.filter((d)=>{
                     return d.sub_county_name.search(value)!==-1;
                 })
-                setFilteredData(r)
+                setFilteredData(r);
+                setFacilityOwner(r);
+                setFacilitySummary(r);
+                setFacilityType(r);
+                setCommunityUnitsSummary(r);
+                setRecentChanges(r);
+                setFacilityKephLevel(r);
             }else if(value==Data.constituency_name){
                 r=Data.filter;
                 r=Data.filter((d)=>{
                     return d.constituency_name.search(value)!==-1;
                 })
-                setFilteredData(r)
+                setFilteredData(r);
+                setFacilityOwner(r);
+                setFacilitySummary(r);
+                setFacilityType(r);
+                setCommunityUnitsSummary(r);
+                setRecentChanges(r);
+                setFacilityKephLevel(r);
             }else if(value==Data.ward_name){
                 r=Data.filter;
                 r=Data.filter((d)=>{
                     return d.ward_name.search(value)!==-1;
                 })
-                setFilteredData(r)
+               setFilteredData(r);
+                setFacilityOwner(r);
+                setFacilitySummary(r);
+                setFacilityType(r);
+                setCommunityUnitsSummary(r);
+                setRecentChanges(r);
+                setFacilityKephLevel(r);
             }
      }        
     //onChange function that will filtered the json data
-    const handleSearch=(e)=>{
-        let value = e.target.value;
+    function handleSearch(){
+        setSearchBtn(
+            <>
+                <button className="btn btn-info"><span class="material-symbols-outlined right" style={{color:"white"}}  onClick={dontShowCounty}>close</span></button>
+            </>
+        )
+        showCounty();
+        console.log(searchFacilty)
+        let value = searchFacilty;
         let result = [];
-        if(value==Data.county){
-                result = Data.filter;
-                result = Data.filter((data) => {
-                return data.county.search(value) !== -1; //filtered the county data
-                });
-                setFilteredData(result);
-            }else if(value==Data.sub_county_name){
-                result = Data.filter;
-                result = Data.filter((data) => {
-                return data.sub_county_name.search(value) !== -1; //filtered the county data
-                });
-                setFilteredData(result);
-            }else if(value==Data.constituency_name){
-                result = Data.filter;
-                result = Data.filter((data) => {
-                return data.constituency_name.search(value) !== -1; //filtered the county data
-                });
-                setFilteredData(result);
-            }else if(value==Data.ward_name){
-                result = Data.filter;
-                result = Data.filter((data) => {
-                return data.ward_name.search(value) !== -1; //filtered the county data
-                });
-                setFilteredData(result);
-            }else if(value==Data.facility_type_name){
-                result = Data.filter;
-                result = Data.filter((data) => {
-                return data.facility_type_name.search(value) !== -1; //filtered the county data
-                });
-                setFilteredData(result);
-            }      
+        result = Data.filter;
+        result = Data.filter((data) => {
+        return data.county.search(value) !== -1; //filtered the county data
+        });
+        console.log(value)
+        setFilteredDropData(result);
+        // if(value==Data.county){
+        //     }else if(value==Data.sub_county_name){
+        //         result = Data.filter;
+        //         result = Data.filter((data) => {
+        //         return data.sub_county_name.search(value) !== -1; //filtered the county data
+        //         });
+        //         setFilteredDropData(result);
+        //     }else if(value==Data.constituency_name){
+        //         result = Data.filter;
+        //         result = Data.filter((data) => {
+        //         return data.constituency_name.search(value) !== -1; //filtered the county data
+        //         });
+        //         setFilteredDropData(result);
+        //     }else if(value==Data.ward_name){
+        //         result = Data.filter;
+        //         result = Data.filter((data) => {
+        //         return data.ward_name.search(value) !== -1; //filtered the county data
+        //         });
+        //         setFilteredDropData(result);
+        //     }else if(value==Data.facility_type_name){
+        //         result = Data.filter;
+        //         result = Data.filter((data) => {
+        //         return data.facility_type_name.search(value) !== -1; //filtered the county data
+        //         });
+        //         setFilteredDropData(result);
+        //     }      
        
     }
     
@@ -115,9 +160,16 @@ function Dashboard(props) {
         let result = [];
         result = Data.filter;
         result = Data.filter((data) => {
-         return data.county.search(value) !== -1; //filtered the county data
+         return data.county.search(value) !==-1; //filtered the county data
         });
+
         setFilteredData(result);
+        setFacilityOwner(result);
+        setFacilitySummary(result);
+        setFacilityType(result);
+        setCommunityUnitsSummary(result);
+        setRecentChanges(result);
+        setFacilityKephLevel(result);
     }
     //onChange function that will filtered the constituency data
     const handleConstituencyData=(e)=>{
@@ -132,6 +184,12 @@ function Dashboard(props) {
             return  data.sub_county_name.search(value) !== -1;//filtered the constituency data
         });
         setFilteredData(result);
+        setFacilityOwner(result);
+        setFacilitySummary(result);
+        setFacilityType(result);
+        setCommunityUnitsSummary(result);
+        setRecentChanges(result);
+        setFacilityKephLevel(result);
     }
     //onChange function that will filtered the ward data
     const handleWardData=(e)=>{
@@ -146,19 +204,44 @@ function Dashboard(props) {
         return  data.constituency_name.search(value) !== -1;//filtered the constituency data
         });
         setFilteredData(result);
+        setFacilityOwner(result);
+        setFacilitySummary(result);
+        setFacilityType(result);
+        setCommunityUnitsSummary(result);
+        setRecentChanges(result);
+        setFacilityKephLevel(result);
     }
     // //onChange function that will filtered the county data
     const handleStoreWard=(e)=>{
         const value = e.target.value;
         getDashboardData(value);
-        // window.location.reload();
         dontShowWardSelect();
-        change();
         localStorage.setItem("Ward",value);
+        getDashboardData(value);
+        let result = [];
+        result = Data.filter;
+        result = Data.filter((data) => {
+        return  data.ward_name.search(value) !== -1;//filtered the constituency data
+        });
+        setFacilityOwner(result);
+        setFacilitySummary(result);
+        setFacilityType(result);
+        setCommunityUnitsSummary(result);
+        setRecentChanges(result);
+        setFacilityKephLevel(result);
+        change();
     }
    const change=()=>{
-    showCountySelect()
+    const startChange=document.querySelector('.start');
+    startChange.style.display="block";
+    dontShowCountySelect()
    }
+   const start=()=>{
+    const startChange=document.querySelector('.start');
+    startChange.style.display="none";
+    showCountySelect();
+   }
+   
     //function to show the counties
     const showCounty=()=>{
         const show=document.querySelector('.showCounty');
@@ -167,6 +250,11 @@ function Dashboard(props) {
     const dontShowCounty=()=>{
         const show=document.querySelector('.showCounty');
         show.style.display="none";
+        setSearchBtn(
+        <>
+            <button className="btn btn-success"><span class="material-symbols-outlined right" style={{color:"white"}}  onClick={handleSearch}>search</span></button>
+        </>
+        )
     }
     //function to show the subcounties select
     const showCountySelect=()=>{
@@ -204,23 +292,25 @@ function Dashboard(props) {
         const show=document.querySelector('.ward');
         show.style.display="none";
     }
-   
+    
     return (
     <>
         <Navbar/>
         <div className='container' style={{display:"flex",marginTop:"20px"}}>
-            <input className="form-control me-2" type="text" onFocus={showCounty} onChange={(e)=>handleSearch(e)} placeholder="Search a facility/CHU" aria-label="Search"/>
-            <button className="btn btn-info"><span class="material-symbols-outlined right" style={{color:"white"}}  onClick={dontShowCounty}>close</span></button>
+            <form onSubmit={handleSearch}>
+            <input className="form-control me-2" type="text" onChange={(e)=>setSearchFacility(e.target.value)} placeholder="Search a facility/CHU" aria-label="Search"/>
+            {searchBtn}
+            </form>
         </div>
         <div className='showCounty container card' style={{display:'none', marginTop:"20px", border:'solid 1px gray',height:"280px",overflow:'scroll'}}>
                 <div style={{color:"rgb(79, 30, 107)",fontWeight:"normal",display:"flex",marginLeft:"20px"}}>
-                    <p>{localStorage.getItem('county')} County</p><span class="material-symbols-outlined">chevron_right</span> 
-                    <p style={{marginLeft:"5px"}}>{localStorage.getItem('subcounty')} Sub-county</p> <span class="material-symbols-outlined">chevron_right</span> 
-                    <p style={{marginLeft:"5px"}}>{localStorage.getItem('constituency')} Constituency</p><span class="material-symbols-outlined">chevron_right</span> 
-                    <p style={{marginLeft:"5px"}}>{localStorage.getItem('ward')} Ward</p>
+                    <p>{localStorage.getItem('County')} County</p><span class="material-symbols-outlined">chevron_right</span> 
+                    <p style={{marginLeft:"5px"}}>{localStorage.getItem('Subcounty')} Sub-county</p> <span class="material-symbols-outlined">chevron_right</span> 
+                    <p style={{marginLeft:"5px"}}>{localStorage.getItem('Constituency')} Constituency</p><span class="material-symbols-outlined">chevron_right</span> 
+                    <p style={{marginLeft:"5px"}}>{localStorage.getItem('Ward')} Ward</p>
                 </div>
-            {filteredData?filteredData.map((filtered)=>(
-                <div key={filtered.county} >
+            {filteredDropData?filteredDropData.map((filtered)=>(
+                <div key={filtered.id} >
                     <hr/>
                     <div style={{display:"flex"}}><span class="material-symbols-outlined">chevron_right</span>County</div>
                     <div style={{display:"flex",marginLeft:"50px"}}> <span class="material-symbols-outlined">expand_more</span>{filtered.county} </div>
@@ -243,22 +333,22 @@ function Dashboard(props) {
             <div className='col'>
                 <h2 style={{ marginLeft:"20px",}}>Overview</h2>
                <div style={{color:"rgb(79, 30, 107)",fontWeight:"normal",display:"flex",marginLeft:"20px",}}>
-                    <p>{localStorage.getItem('county')} County</p><span class="material-symbols-outlined">chevron_right</span> 
-                    <p style={{marginLeft:"5px"}}>{localStorage.getItem('subcounty')} Sub-county</p> <span class="material-symbols-outlined">chevron_right</span> 
-                    <p style={{marginLeft:"5px"}}>{localStorage.getItem('constituency')} Constituency</p><span class="material-symbols-outlined">chevron_right</span> 
+                    <p>{localStorage.getItem('County')} County</p><span class="material-symbols-outlined">chevron_right</span> 
+                    <p style={{marginLeft:"5px"}}>{localStorage.getItem('Subcounty')} Sub-county</p> <span class="material-symbols-outlined">chevron_right</span> 
+                    <p style={{marginLeft:"5px"}}>{localStorage.getItem('Constituency')} Constituency</p><span class="material-symbols-outlined">chevron_right</span> 
                     <p style={{marginLeft:"5px"}}>{localStorage.getItem('ward')} Ward</p>
                </div>
             </div>
             
             <div className='col-md-auto' style={{marginRight:"50px"}}>
-                <p style={{fontWeight:"bolder",float:"right",marginRight:"390px",marginBottom:"-20px"}}>County:</p><br/>
+                <p style={{fontWeight:"bolder",display:'flex',float:"right",marginRight:"390px",marginBottom:"-20px"}}>County:  <a href="#" style={{display:'none'}} className="start" onClick={start}>Change</a></p><br/>
                 <form class="d-flex" style={{float:"right",width:"450px", height:"50px"}}>
                     {/* ward select */}
                     <select class="form-select form-select-sm ward" style={{display:"none"}} onChange={handleStoreWard} aria-label=".form-select-sm example">
                     <option style={{fontWeight:"bold"}} selected>Select ward</option><br/>
                         {filteredData&&filteredData.map((data)=>(
                             <>
-                                <option style={{fontWeight:"bold"}} value={data.ward_name}>{data.ward_name}</option>
+                                <option style={{fontWeight:"bold"}} defaultValue={data.ward_name}>{data.ward_name}</option>
                             </>
                         ))}
                     </select>
@@ -307,8 +397,8 @@ function Dashboard(props) {
                     <div style={{marginLeft:"200px"}}><p style={{fontWeight:"bold"}}>VALUE</p></div>
                 </div>
                 <hr className="dropdown-divider" style={{marginTop:"-15px"}}/>
-                 {filteredData&&filteredData.map((data)=>(
-                    <div key={data.d} style={{display:"flex", fontWeight:"bold"}}>
+                 {facilityOwner&&facilityOwner.map((data)=>(
+                    <div key={data.id} style={{display:"flex", fontWeight:"bold"}}>
                     <div>
                         <ul style={{decoration:'none',marginLeft:"-30px"}}>
                             <li><div style={{display:'flex'}}>Private Practice    <div style={{marginLeft:"150px"}}>{data.value1}</div></div> </li>
@@ -346,7 +436,7 @@ function Dashboard(props) {
                         </div>
                         <div>
                         <ul style={{decoration:'none',marginLeft:"70px"}}>
-                        {filteredData&&filteredData.map((data)=>(
+                        {facilityType&&facilityType.map((data)=>(
                                 <div key={data.id}>
                                     <li>{data.value5}</li>
                                     <li>{data.value1}</li>
@@ -385,7 +475,7 @@ function Dashboard(props) {
                         </div>
                         <div>
                         <ul style={{decoration:'none',marginLeft:"30px"}}>
-                        {filteredData&&filteredData.map((data)=>(
+                        {facilitySummary&&facilitySummary.map((data)=>(
                                 <div key={data.id}>
                                     <li>{data.value5}</li>
                                     <li>{data.value3}</li>
@@ -427,7 +517,7 @@ function Dashboard(props) {
                         </div>
                         <div>
                         <ul style={{decoration:'none',marginRight:"30px"}}>
-                            {filteredData&&filteredData.map((data)=>(
+                            {communityUnitsSummary&&communityUnitsSummary.map((data)=>(
                                 <div key={data.id}>
                                     <li>{data.value5}</li>
                                     <li>{data.value2}</li>
@@ -462,7 +552,7 @@ function Dashboard(props) {
                         </div>
                         <div>
                         <ul style={{listStyle:'none',marginLeft:"90px"}}>
-                        {filteredData&&filteredData.map((data)=>(
+                        {recentChanges&&recentChanges.map((data)=>(
                                 <div key={data.id}>
                                     <li>{data.value5}</li>
                                     <li>{data.value1}</li>
@@ -498,7 +588,7 @@ function Dashboard(props) {
                         </div>
                         <div>
                         <ul style={{listStyle:'none',marginLeft:"200px"}}>
-                        {filteredData&&filteredData.map((data)=>(
+                        {facilityKephlevel&&facilityKephlevel.map((data)=>(
                                 <div key={data.id}>
                                     <li>{data.value5}</li>
                                     <li>{data.value1}</li>
@@ -515,7 +605,7 @@ function Dashboard(props) {
         </div>
 
         {/* row3 */}
-        <div class="container" style={{marginTop:"50px"}}>
+        {/* <div class="container" style={{marginTop:"50px"}}>
             <div class="row">
                 <div className='card' style={{background:"#f2f2f2"}}>
                     <div class="card-header" style={{fontSize:'18px',fontWeight:"bolder",color:'rgb(79, 30, 107)',background:'#f2f2f2'}}>
@@ -528,36 +618,36 @@ function Dashboard(props) {
                     ))}
                 </div>
             </div>
-        </div>    
+        </div>     */}
                     
         {/* row4 */}
-        <div class="container" style={{marginTop:"50px"}}>
+        {/* <div class="container" style={{marginTop:"50px"}}>
             <div class="row">
-                {/* col1 */}
+                col1
                 <div class="col card" style={{background:"#f2f2f2",marginRight:"20px"}}>
                 <div class="card-header" style={{fontSize:'18px',fontWeight:"bolder",color:'rgb(79, 30, 107)',background:'#f2f2f2'}}>
                     FACILITY OWNERS
                 </div><br/>
-                {filteredData&&filteredData.map((data)=>(
+                {facilityType&&facilityType.map((data)=>(
                         <div className='card' style={{height:'35rem',marginBottom:'20px'}}>
                         <BarChart props={data.value3} props2={data.value2}/>
                     </div>
                     ))}
                 </div>
 
-                {/* col2 */}
+                col2
                 <div class="col card" style={{background:'#f2f2f2',marginRight:"20px"}}>
                 <div class="card-header" style={{fontSize:'18px',fontWeight:"bolder",color:'rgb(79, 30, 107)',background:'#f2f2f2'}}>
                     FACILITY TYPES
                 </div><br/>
-                {filteredData&&filteredData.map((data)=>(
+                {facilityType&&facilityType.map((data)=>(
                         <div className='card' style={{height:'35rem',marginBottom:'20px'}}>
                         <BarChart props={data.value4} props2={data.value2}/>
                     </div>
                     ))}
                 </div>
             </div>
-        </div>
+        </div> */}
        <Footer/>
     </>
     );

@@ -32,9 +32,9 @@ function Map(props) {
         <>
         <Navbar/>
             <div className='row'>
-                <div className='col-4' style={{background:'whitesmoke',height:'115vh',marginBottom:"-30px",boxShadow:'0 2px 4px 0 rgba(0,0,0,.2)'}}>
+                <div className='col-4' style={{background:'whitesmoke',height:'104vh',marginBottom:"-30px",boxShadow:'0 2px 4px 0 rgba(0,0,0,.2)'}}>
                     <div className='container' style={{display:"flex",marginTop:"20px"}}>
-                        <input className="form-control me-2" type="text" onChange={(e)=>setLocationInput(e.target.value)} placeholder="Search" aria-label="Search"/>
+                        <input className="form-control me-2" type="text" onChange={(e)=>setLocationInput(e.target.value)} placeholder="Search Location" aria-label="Search"/>
                         <button className="btn btn-success" onClick={handleSearch}><span class="material-symbols-outlined">search</span></button>
                     </div>
                 </div>
@@ -45,7 +45,7 @@ function Map(props) {
                     {/* map iframe */}
                     <div class="mapouter" style={{position:'relative',textAlign:'right',height:'500px',width:'600px',marginLeft:'100px'}}>
                         <div class="gmap_canvas" style={{overflow:'hidden',background:'none!important',height:'500px',width:'600px'}}>
-                            <iframe className='gmap' width="600" height="500" id="gmap_canvas" src={mapIframe} frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                            <iframe className='gmap' width="600" height="500" id="gmap_canvas" src={mapIframe} frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe>
                         </div>
                     </div>
                     <div style={{display:'flex',marginTop:'20px'}}>
