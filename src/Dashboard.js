@@ -121,33 +121,6 @@ function Dashboard(props) {
         return data.county.search(value) !== -1; //filtered the county data
         });
         setFilteredDropData(result);
-        // if(value==Data.county){
-        //     }else if(value==Data.sub_county_name){
-        //         result = Data.filter;
-        //         result = Data.filter((data) => {
-        //         return data.sub_county_name.search(value) !== -1; //filtered the county data
-        //         });
-        //         setFilteredDropData(result);
-        //     }else if(value==Data.constituency_name){
-        //         result = Data.filter;
-        //         result = Data.filter((data) => {
-        //         return data.constituency_name.search(value) !== -1; //filtered the county data
-        //         });
-        //         setFilteredDropData(result);
-        //     }else if(value==Data.ward_name){
-        //         result = Data.filter;
-        //         result = Data.filter((data) => {
-        //         return data.ward_name.search(value) !== -1; //filtered the county data
-        //         });
-        //         setFilteredDropData(result);
-        //     }else if(value==Data.facility_type_name){
-        //         result = Data.filter;
-        //         result = Data.filter((data) => {
-        //         return data.facility_type_name.search(value) !== -1; //filtered the county data
-        //         });
-        //         setFilteredDropData(result);
-        //     }      
-       
     }
     
     //onChange function that will filtered the subcounty data
