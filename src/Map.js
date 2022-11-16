@@ -12,7 +12,10 @@ function Map(props) {
     //download gmap
     const downloadGmap=()=>{
         const map=document.querySelector('.gmap');
-        map.save();
+        var a =document.body.appendChild(document.createElement('a'));
+        a.download="map.html";
+        a.href="data:text/html,"+map.innerHTML;
+        a.click();
     }
     //print gmap
     const printGmap=()=>{
