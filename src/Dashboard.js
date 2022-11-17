@@ -123,16 +123,6 @@ function Dashboard(props) {
         setFilteredDropData(result);
     }
     //onChange function that will filtered the subcounty data
-    //facilty summary stats
-    const [approve,setApprove]=useState([]);
-    //facility type states
-    const [nursingHome,setNursingHome]=useState([]);
-    const [hospital,setHospital]=useState([]);
-    const [medicalClinic,setMedicalClinic]=useState([]);
-    const [medicalCenter,setMedicalCenter]=useState([]);
-    const [healthCenter,setHealthCenter]=useState([]);
-    const [dispensary,setDispensary]=useState([]);
-    const [standAlone,setStandAlone]=useState([]);
 
     const handleSubCountyData=(e)=>{
         dontShowCountySelect();
@@ -145,33 +135,8 @@ function Dashboard(props) {
         result = Data.filter((data) => {
          return data.county.search(value) !==-1; //filtered the county data
         });
-        /*facility summary */
-            setFacilitySummary(result);
-            //approved
-            let approved=[];
-            approved=facilitySummary.filter;
-            approved=facilitySummary.filter((data)=>{
-                return data.approved.search(value)!==-1;
-            });
-            setApprove(approved);
-
-        /*facility type*/
-            setFacilityType(result);
-            //medical clinic
-            let _medicalClinic=[];
-            _medicalClinic=facilityType.filter;
-            _medicalClinic=facilityType.filter((data)=>{
-                return data.facility_type_name.search(value)!==-1;
-            });
-            setMedicalClinic(_medicalClinic);
-            //Dispensary
-            let _dispensary=[];
-            _dispensary=facilityType.filter;
-            _dispensary=facilityType.filter((data)=>{
-                return data.facility_type_name.search(value)!==-1;
-            });
-            setDispensary(_dispensary);
-            
+        setFacilityType(result);
+        setFacilitySummary(result);  
         setFilteredData(result);
         setFacilityOwner(result);
         setCommunityUnitsSummary(result);
@@ -437,35 +402,14 @@ function Dashboard(props) {
                 <p>Download</p>
                 <div style={{display:"flex"}}>
                     <div><p style={{fontWeight:"bold"}}>METRIC</p></div>
-                    <div style={{marginLeft:"200px"}}><p style={{fontWeight:"bold"}}>VALUE</p></div>
                 </div>
                 <hr className="dropdown-divider" style={{marginTop:"-15px"}}/>
                 <div style={{display:"flex",fontWeight:"bold"}}>
-                    <div>
-                        <ul style={{decoration:'none',marginLeft:"-30px"}}>
-                            <li>MEDICAL CLINIC</li>
-                            <li>DISPENSARY</li>
-                            <li>HOSPITALS</li>
-                            <li>MEDICAL CENTRE</li>
-                            <li>HEALTH CENTRE</li>
-                            <li>NURSING HOME</li>
-                            <li>STAND ALONE</li>
-                        </ul>
-                        </div>
                         <div>
-                        <ul style={{decoration:'none',marginLeft:"70px"}}>
-                            <p>{facilityType.length}</p>
-                            <p>{medicalClinic.length}</p>
-                            <p>{dispensary.length}</p>
+                        <ul style={{marginLeft:'-20px'}}>
                         {facilityType&&facilityType.map((data)=>(
                                 <div key={data.id}>
                                     <li>{data.facility_type_name}</li>
-                                    <li>{data.value1}</li>
-                                    <li>{data.value2}</li>
-                                    <li>{data.value4}</li>
-                                    <li>{data.value1}</li>
-                                    <li>{data.value2}</li>
-                                    <li>{data.value3}</li>
                                 </div>
                             ))}
                         </ul>
@@ -496,8 +440,7 @@ function Dashboard(props) {
                         </div>
                         <div>
                         <ul style={{decoration:'none',marginLeft:"30px"}}>
-                            <p>hy {facilitySummary.length}</p>
-                            <p>helloe {approve.length}</p>
+                            <div>{facilitySummary.length}</div>
                         {facilitySummary&&facilitySummary.map((data)=>(
                                 <div key={data.id}>
                                     <li>{data.facility_type_name}</li>
