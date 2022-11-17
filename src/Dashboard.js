@@ -367,26 +367,14 @@ function Dashboard(props) {
                 <p>Download</p>
                 <div style={{display:"flex"}}>
                     <div><p style={{fontWeight:"bold"}}>METRIC</p></div>
-                    <div style={{marginLeft:"200px"}}><p style={{fontWeight:"bold"}}>VALUE</p></div>
                 </div>
                 <hr className="dropdown-divider" style={{marginTop:"-15px"}}/>
                 <div style={{display:"flex",fontWeight:"bold"}}>
-                    <div>
-                        <ul style={{decoration:'none',marginLeft:"-30px"}}>
-                            <li>Private Practice</li>
-                            <li>Non-Governmental Organizations</li>
-                            <li>Ministry of Health</li>
-                            <li>Faith Based Organization</li>
-                        </ul>
-                        </div>
                         <div>
-                        <ul style={{decoration:'none',marginLeft:"70px"}}>
+                        <ul style={{decoration:'none',marginLeft:"-20px"}}>
                         {facilityOwner&&facilityOwner.map((data)=>(
                                 <div key={data.id}>
-                                    <li>{data.value5}</li>
-                                    <li>{data.value1}</li>
-                                    <li>{data.value2}</li>
-                                    <li>{data.value4}</li>
+                                    <li>{data.owner_name}.</li>
                                 </div>
                             ))}
                         </ul>
@@ -409,7 +397,7 @@ function Dashboard(props) {
                         <ul style={{marginLeft:'-20px'}}>
                         {facilityType&&facilityType.map((data)=>(
                                 <div key={data.id}>
-                                    <li>{data.facility_type_name}</li>
+                                    <li>{data.facility_type_name}.</li>
                                 </div>
                             ))}
                         </ul>
@@ -440,16 +428,11 @@ function Dashboard(props) {
                         </div>
                         <div>
                         <ul style={{decoration:'none',marginLeft:"30px"}}>
-                            <div>{facilitySummary.length}</div>
-                        {facilitySummary&&facilitySummary.map((data)=>(
-                                <div key={data.id}>
-                                    <li>{data.facility_type_name}</li>
-                                    <li>{data.value3}</li>
-                                    <li>{data.value4}</li>
-                                    <li>{data.value3}</li>
-                                    <li>{data.value1}</li>
-                                </div>
-                            ))}
+                            <li>{facilitySummary.length}</li>
+                            <li>{facilitySummary.length}</li>
+                            <li>{facilitySummary.length}</li>
+                            <li>{facilitySummary.length}</li>
+                            <li>{facilitySummary.length}</li>
                         </ul>
                     </div>
                  </div>
@@ -539,7 +522,6 @@ function Dashboard(props) {
                 <p>Download</p>
                 <div style={{display:"flex",}}><div style={{borderBottom:"solid 2px #000"}}></div>
                     <div><p style={{fontWeight:"bold"}}>METRIC</p></div>
-                    <div style={{marginLeft:"200px"}}><p style={{fontWeight:"bold"}}>VALUE</p></div>
                 </div>
                 <hr className="dropdown-divider" style={{marginTop:"-15px"}}/>
                 <div style={{display:"flex",fontWeight:'bold'}}>
