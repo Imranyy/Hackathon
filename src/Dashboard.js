@@ -3,6 +3,8 @@ import Navbar from './components/Navbar';
 import {Link} from "react-router-dom";
 import Footer from './components/Footer';
 import BarChart from './components/BarChart';
+import BarGraph2 from './components/BarGraph2';
+import BarGraph3 from './components/BarGraph3';
 function Dashboard(props) {
     const [Data,setData]=useState([]);
     const [filteredData,setFilteredData]=useState(Data);
@@ -266,6 +268,7 @@ function Dashboard(props) {
         show.style.display="none";
     }
     
+ 
     return (
     <>
         <Navbar/>
@@ -430,9 +433,9 @@ function Dashboard(props) {
                         <ul style={{decoration:'none',marginLeft:"30px"}}>
                             <li>{facilitySummary.length}</li>
                             <li>{facilitySummary.length}</li>
-                            <li>{facilitySummary.length}</li>
-                            <li>{facilitySummary.length}</li>
-                            <li>{facilitySummary.length}</li>
+                            <li>0</li>
+                            <li>0</li>
+                            <li>0</li>
                         </ul>
                     </div>
                  </div>
@@ -466,14 +469,8 @@ function Dashboard(props) {
                         </div>
                         <div>
                         <ul style={{decoration:'none',marginRight:"30px"}}>
-                            {communityUnitsSummary&&communityUnitsSummary.map((data)=>(
-                                <div key={data.id}>
-                                    <li>{data.value5}</li>
-                                    <li>{data.value2}</li>
-                                    <li>{data.value2}</li>
-                                    <li>{data.value3}</li>
-                                </div>
-                            ))}
+                            <li>{communityUnitsSummary.length}</li>
+                            <li>{communityUnitsSummary.rejected}</li> 
                         </ul>
                     </div>
                  </div>
@@ -503,7 +500,7 @@ function Dashboard(props) {
                         <ul style={{listStyle:'none',marginLeft:"90px"}}>
                         {recentChanges&&recentChanges.map((data)=>(
                                 <div key={data.id}>
-                                    <li>{data.value5}</li>
+                                    <li>{data.value}</li>
                                     <li>{data.value1}</li>
                                     <li>{data.value2}</li>
                                     <li>{data.value3}</li>
@@ -540,49 +537,43 @@ function Dashboard(props) {
         </div>
 
         {/* row3 */}
-        {/* <div class="container" style={{marginTop:"50px"}}>
+        <div class="container" style={{marginTop:"50px"}}>
             <div class="row">
                 <div className='card' style={{background:"#f2f2f2"}}>
                     <div class="card-header" style={{fontSize:'18px',fontWeight:"bolder",color:'rgb(79, 30, 107)',background:'#f2f2f2'}}>
                     FACILITIES & CHUS BY COUNTY
                     </div><br/>
-                    {filteredData&&filteredData.map((data)=>(
-                        <div className='card' style={{height:'35rem',marginBottom:'20px'}}>
-                        <BarChart props={data.value5} props2={data.value2}/>
+                    <div className='card' style={{height:'35rem',marginBottom:'20px'}}>
+                        <BarChart props={facilitySummary.length} props2={facilitySummary.length}/>
                     </div>
-                    ))}
                 </div>
             </div>
-        </div>     */}
+        </div>    
                     
         {/* row4 */}
-        {/* <div class="container" style={{marginTop:"50px"}}>
+        <div class="container" style={{marginTop:"50px"}}>
             <div class="row">
-                col1
-                <div class="col card" style={{background:"#f2f2f2",marginRight:"20px"}}>
+                {/* col1 */}
+                <div class="col card" style={{background:"#f2f2f2",marginRight:"20px",height:'25rem'}}>
                 <div class="card-header" style={{fontSize:'18px',fontWeight:"bolder",color:'rgb(79, 30, 107)',background:'#f2f2f2'}}>
                     FACILITY OWNERS
                 </div><br/>
-                {facilityType&&facilityType.map((data)=>(
-                        <div className='card' style={{height:'35rem',marginBottom:'20px'}}>
-                        <BarChart props={data.value3} props2={data.value2}/>
+                    <div className='card' style={{height:'20rem',marginBottom:'20px'}}>
+                        <BarGraph2 props={facilitySummary.length} props2={facilitySummary.length}/>
                     </div>
-                    ))}
                 </div>
 
-                col2
-                <div class="col card" style={{background:'#f2f2f2',marginRight:"20px"}}>
+                {/* col2 */}
+                <div class="col card" style={{background:'#f2f2f2',marginRight:"20px",height:'25rem'}}>
                 <div class="card-header" style={{fontSize:'18px',fontWeight:"bolder",color:'rgb(79, 30, 107)',background:'#f2f2f2'}}>
                     FACILITY TYPES
                 </div><br/>
-                {facilityType&&facilityType.map((data)=>(
-                        <div className='card' style={{height:'35rem',marginBottom:'20px'}}>
-                        <BarChart props={data.value4} props2={data.value2}/>
+                    <div className='card' style={{height:'20rem',marginBottom:'20px'}}>
+                        <BarGraph3 props={facilitySummary.length} props2={facilitySummary.length}/>
                     </div>
-                    ))}
                 </div>
             </div>
-        </div> */}
+        </div>
        <Footer/>
     </>
     );

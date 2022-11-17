@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 
 function Map(props) {
     const[mapIframe,setMapIframe]=useState('');
     const [locationInput,setLocationInput]=useState('');
-    const handleSearch=(e)=>{
+    const [locationSelect,setLocationSelect]=useState('');
+    const handleSearch=()=>{
         const result=`https://maps.google.com/maps?q=${locationInput}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+        setMapIframe(result);
+    }
+    const handleSelect=()=>{
+        const result=`https://maps.google.com/maps?q=${locationSelect}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
         setMapIframe(result);
     }
     //download gmap
@@ -28,15 +33,78 @@ function Map(props) {
             a.document.close();
         a.print();
     }
+    //get facility to display on select option tag
+    const [data,setData]=useState([]);
+    const getApiData=async()=>{
+        try {
+            const token=sessionStorage.getItem('token');
+            const url='http://api.kmhfltest.health.go.ke/api/facilities/facilities/?format=json&page_size=300';
+            const response=await fetch(url,{
+                method:'Get',
+                headers:{
+                    authorization:`bearer ${token}`,
+                }
+            }
+        )
+            const parseRes=await response.json();
+            setData(parseRes.results);
+            console.log(parseRes.results);
+        } catch (error) {
+            console.log("Error: ",error.message)
+        }
+    }
+    useEffect(()=>{
+        getApiData();
+    },[]);
+    const [toggleBtn,setToggleBtn]=useState(
+        <>
+            <button className='btn btn-info' style={{marginTop:"20px",marginLeft:'10px'}} onClick={change}>Toggle Input</button>
+        </>
+    );
+    
+   function change(){
+        document.querySelector('.select').style.display='none'
+        document.querySelector('.input').style.display='block'
+        setToggleBtn(
+            <>
+                <button className='btn btn-info' style={{marginTop:"20px",marginLeft:'25px'}} onClick={change1}>Toggle Input</button>
+            </>
+        );
+    }
+    function change1(){
+            document.querySelector('.select').style.display='block'
+            document.querySelector('.input').style.display='none'
+            setToggleBtn(
+                <>
+                    <button className='btn btn-info' style={{marginTop:"20px",marginLeft:'10px'}} onClick={change}>Toggle Input</button>
+                </>
+            );
+    }
+    data.map((data)=>{
+        console.log(data.lat_long)
+    })
     return (
         <>
         <Navbar/>
             <div className='row'>
                 <div className='col-4' style={{background:'whitesmoke',height:'104vh',marginBottom:"-30px",boxShadow:'0 2px 4px 0 rgba(0,0,0,.2)'}}>
-                    <div className='container' style={{display:"flex",marginTop:"20px"}}>
-                        <input className="form-control me-2" type="text" onChange={(e)=>setLocationInput(e.target.value)} placeholder="Search Location" aria-label="Search"/>
-                        <button className="btn btn-success" onClick={handleSearch}><span class="material-symbols-outlined">search</span></button>
+                    <div className='input' style={{display:'none'}}>
+                        <div className='container' style={{display:"flex",marginTop:"20px"}}>
+                            <input className="form-control me-2" type="text" onChange={(e)=>setLocationInput(e.target.value)} placeholder="Search Location" aria-label="Search"/>
+                            <button className="btn btn-success" onClick={handleSearch}><span class="material-symbols-outlined">search</span></button>
+                        </div>
                     </div>
+                        <div className='select'>
+                            <select class="form-select form-select-md" style={{marginTop:"20px",marginLeft:'10px'}} onChange={(e)=>setLocationInput(e.target.value)} onClick={handleSearch} aria-label=".form-select-sm example">
+                                <option style={{fontWeight:"bold"}} selected>Select Facility</option><br/>
+                                    {data&&data.map((data)=>(
+                                        <>
+                                            <option style={{fontWeight:"bold"}} defaultValue={data.county[0]}>{data.county}&rarr; {data.facility_type_name}</option>
+                                        </>
+                                    ))}
+                            </select>
+                        </div>
+                        {toggleBtn}
                 </div>
                 <div className='col'>
                     <h3 style={{marginLeft:'250px',marginTop:"20px",color:"grey"}}>Find Facility Location

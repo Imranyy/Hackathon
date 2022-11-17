@@ -19,7 +19,7 @@ ChartJS.register(
 
 function BarChart({props,props2}) {
     const state = {
-        labels: [`${localStorage.getItem('county')} County Facilities`,`${localStorage.getItem('county')} CHU`],
+        labels: [`${localStorage.getItem('County')} County Facilities`,`${localStorage.getItem('County')} CHU`],
         datasets: [
             {
                 label: 'FACILITIES & CHUS BY COUNTY',
