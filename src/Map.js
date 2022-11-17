@@ -16,7 +16,7 @@ function Map(props) {
         let _result=[];
         _result=data.filter;
         _result=data.filter((data)=>{
-            return data.ward_name[0].search(value)!==-1;
+            return data.ward_name.search(value)!==-1;
         });
         _result.map((lat_long)=>{
             return setLat_long(`${lat_long.lat_long[0]},${lat_long.lat_long[1]}`);
