@@ -122,8 +122,18 @@ function Dashboard(props) {
         });
         setFilteredDropData(result);
     }
-    
     //onChange function that will filtered the subcounty data
+    //facilty summary stats
+    const [approve,setApprove]=useState([]);
+    //facility type states
+    const [nursingHome,setNursingHome]=useState([]);
+    const [hospital,setHospital]=useState([]);
+    const [medicalClinic,setMedicalClinic]=useState([]);
+    const [medicalCenter,setMedicalCenter]=useState([]);
+    const [healthCenter,setHealthCenter]=useState([]);
+    const [dispensary,setDispensary]=useState([]);
+    const [standAlone,setStandAlone]=useState([]);
+
     const handleSubCountyData=(e)=>{
         dontShowCountySelect();
         showSubCountySelect();
@@ -135,11 +145,35 @@ function Dashboard(props) {
         result = Data.filter((data) => {
          return data.county.search(value) !==-1; //filtered the county data
         });
+        /*facility summary */
+            setFacilitySummary(result);
+            //approved
+            let approved=[];
+            approved=facilitySummary.filter;
+            approved=facilitySummary.filter((data)=>{
+                return data.approved.search(value)!==-1;
+            });
+            setApprove(approved);
 
+        /*facility type*/
+            setFacilityType(result);
+            //medical clinic
+            let _medicalClinic=[];
+            _medicalClinic=facilityType.filter;
+            _medicalClinic=facilityType.filter((data)=>{
+                return data.facility_type_name.search(value)!==-1;
+            });
+            setMedicalClinic(_medicalClinic);
+            //Dispensary
+            let _dispensary=[];
+            _dispensary=facilityType.filter;
+            _dispensary=facilityType.filter((data)=>{
+                return data.facility_type_name.search(value)!==-1;
+            });
+            setDispensary(_dispensary);
+            
         setFilteredData(result);
         setFacilityOwner(result);
-        setFacilitySummary(result);
-        setFacilityType(result);
         setCommunityUnitsSummary(result);
         setRecentChanges(result);
         setFacilityKephLevel(result);
@@ -420,9 +454,12 @@ function Dashboard(props) {
                         </div>
                         <div>
                         <ul style={{decoration:'none',marginLeft:"70px"}}>
+                            <p>{facilityType.length}</p>
+                            <p>{medicalClinic.length}</p>
+                            <p>{dispensary.length}</p>
                         {facilityType&&facilityType.map((data)=>(
                                 <div key={data.id}>
-                                    <li>{data.value5}</li>
+                                    <li>{data.facility_type_name}</li>
                                     <li>{data.value1}</li>
                                     <li>{data.value2}</li>
                                     <li>{data.value4}</li>
@@ -459,9 +496,11 @@ function Dashboard(props) {
                         </div>
                         <div>
                         <ul style={{decoration:'none',marginLeft:"30px"}}>
+                            <p>hy {facilitySummary.length}</p>
+                            <p>helloe {approve.length}</p>
                         {facilitySummary&&facilitySummary.map((data)=>(
                                 <div key={data.id}>
-                                    <li>{data.value5}</li>
+                                    <li>{data.facility_type_name}</li>
                                     <li>{data.value3}</li>
                                     <li>{data.value4}</li>
                                     <li>{data.value3}</li>
