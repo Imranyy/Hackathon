@@ -10,8 +10,22 @@ function Map(props) {
         const result=`https://maps.google.com/maps?q=${locationInput}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
         setMapIframe(result);
     }
+    const[lat,setLat]=useState('');
+    const[long,setLong]=useState('');
     const handleSelect=()=>{
-        const result=`https://maps.google.com/maps?q=${locationSelect}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+        let _result=[];
+        _result=data.filter;
+        _result=data.filter((data)=>{
+            return data.county.search(locationSelect) ;
+        });
+        console.log('hyhh',_result)
+        // _result[0].map((lat_long)=>{
+        //     setLat(lat_long[0]);
+        //     setLong(lat_long[1]);
+        // })
+        // const FacLat_long=`${lat},${long}`;
+
+        const result=`https://maps.google.com/maps?q={FacLat_long}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
         setMapIframe(result);
     }
     //download gmap
@@ -80,9 +94,9 @@ function Map(props) {
                 </>
             );
     }
-    data.map((data)=>{
-        console.log(data.lat_long)
-    })
+    // data.map((data)=>{
+    //     console.log(data.lat_long)
+    // })
     return (
         <>
         <Navbar/>
@@ -95,11 +109,11 @@ function Map(props) {
                         </div>
                     </div>
                         <div className='select'>
-                            <select class="form-select form-select-md" style={{marginTop:"20px",marginLeft:'10px'}} onChange={(e)=>setLocationInput(e.target.value)} onClick={handleSearch} aria-label=".form-select-sm example">
+                            <select class="form-select form-select-md" style={{marginTop:"20px",marginLeft:'10px'}} onChange={(e)=>setLocationSelect(e.target.value)} onClick={handleSelect} aria-label=".form-select-sm example">
                                 <option style={{fontWeight:"bold"}} selected>Select Facility</option><br/>
                                     {data&&data.map((data)=>(
                                         <>
-                                            <option style={{fontWeight:"bold"}} defaultValue={data.county[0]}>{data.county}&rarr; {data.facility_type_name}</option>
+                                            <option style={{fontWeight:"bold"}} defaultValue={data.county}>{data.county}&rarr; {data.facility_type_name}</option>
                                         </>
                                     ))}
                             </select>
