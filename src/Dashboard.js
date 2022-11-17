@@ -371,18 +371,28 @@ function Dashboard(props) {
                     <div style={{marginLeft:"200px"}}><p style={{fontWeight:"bold"}}>VALUE</p></div>
                 </div>
                 <hr className="dropdown-divider" style={{marginTop:"-15px"}}/>
-                 {facilityOwner&&facilityOwner.map((data)=>(
-                    <div key={data.id} style={{display:"flex", fontWeight:"bold"}}>
+                <div style={{display:"flex",fontWeight:"bold"}}>
                     <div>
                         <ul style={{decoration:'none',marginLeft:"-30px"}}>
-                            <li><div style={{display:'flex'}}>Private Practice    <div style={{marginLeft:"150px"}}>{data.value1}</div></div> </li>
-                            <li><div style={{display:"flex"}}>Non-Governmental Organizations  <div style={{marginLeft:"10px"}}>{data.value2}</div></div></li>
-                            <li><div style={{display:"flex"}}>Ministry of Health  <div style={{marginLeft:"140px"}}>{data.value3}</div></div></li>
-                            <li><div style={{display:"flex"}}>Faith Based Organization <div style={{marginLeft:"80px"}}>{data.value4}</div></div></li>
+                            <li>Private Practice</li>
+                            <li>Non-Governmental Organizations</li>
+                            <li>Ministry of Health</li>
+                            <li>Faith Based Organization</li>
                         </ul>
                         </div>
-                 </div>
-                 ))}
+                        <div>
+                        <ul style={{decoration:'none',marginLeft:"70px"}}>
+                        {facilityOwner&&facilityOwner.map((data)=>(
+                                <div key={data.id}>
+                                    <li>{data.value5}</li>
+                                    <li>{data.value1}</li>
+                                    <li>{data.value2}</li>
+                                    <li>{data.value4}</li>
+                                </div>
+                            ))}
+                        </ul>
+                        </div>
+                    </div>
                 </div><br/>
 
                 {/* col2 */}
