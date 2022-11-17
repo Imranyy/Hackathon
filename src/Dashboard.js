@@ -543,24 +543,11 @@ function Dashboard(props) {
                 </div>
                 <hr className="dropdown-divider" style={{marginTop:"-15px"}}/>
                 <div style={{display:"flex",fontWeight:'bold'}}>
-                    <div>
-                        <ul style={{listStyle:'none',marginLeft:"-30px"}}>
-                            <li>Level </li>
-                            <li>Level </li>
-                            <li>Level </li>
-                            <li>Level </li>
-                            <li>Level </li>
-                        </ul>
-                        </div>
                         <div>
-                        <ul style={{listStyle:'none',marginLeft:"200px"}}>
+                        <ul style={{listStyle:'none',marginLeft:"-30px"}}>
                         {facilityKephlevel&&facilityKephlevel.map((data)=>(
                                 <div key={data.id}>
-                                    <li>{data.value5}</li>
-                                    <li>{data.value1}</li>
-                                    <li>{data.value2}</li>
-                                    <li>{data.value3}</li>
-                                    <li>{data.value4}</li>
+                                    <li>{data.keph_level_name}</li>
                                 </div>
                             ))}
                         </ul>
