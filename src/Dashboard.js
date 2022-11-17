@@ -324,7 +324,7 @@ function Dashboard(props) {
                     <option style={{fontWeight:"bold"}} selected>Select ward</option><br/>
                         {filteredData&&filteredData.map((data)=>(
                             <>
-                                <option style={{fontWeight:"bold"}} defaultValue={data.ward_name}>{data.ward_name}</option>
+                                <option style={{fontWeight:"bold"}} value={data.ward_name}>{data.ward_name}</option>
                             </>
                         ))}
                     </select>

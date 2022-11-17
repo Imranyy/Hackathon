@@ -2,30 +2,27 @@ import React, { useState,useEffect } from 'react';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 
-function Map(props) {
+function Map(props) {    
+    const [data,setData]=useState([]);
     const[mapIframe,setMapIframe]=useState('');
     const [locationInput,setLocationInput]=useState('');
-    const [locationSelect,setLocationSelect]=useState('');
     const handleSearch=()=>{
         const result=`https://maps.google.com/maps?q=${locationInput}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
         setMapIframe(result);
     }
-    const[lat,setLat]=useState('');
-    const[long,setLong]=useState('');
-    const handleSelect=()=>{
+    const[lat_long,setLat_long]=useState('');
+    const handleSelect=(e)=>{
+        let value=e.target.value;
         let _result=[];
         _result=data.filter;
         _result=data.filter((data)=>{
-            return data.county.search(locationSelect) ;
+            return data.ward_name[0].search(value)!==-1;
         });
-        console.log('hyhh',_result)
-        // _result[0].map((lat_long)=>{
-        //     setLat(lat_long[0]);
-        //     setLong(lat_long[1]);
-        // })
-        // const FacLat_long=`${lat},${long}`;
-
-        const result=`https://maps.google.com/maps?q={FacLat_long}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+        _result.map((lat_long)=>{
+            return setLat_long(`${lat_long.lat_long[0]},${lat_long.lat_long[1]}`);
+        })
+        console.log(lat_long);
+        const result=`https://maps.google.com/maps?q=${lat_long}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
         setMapIframe(result);
     }
     //download gmap
@@ -48,7 +45,6 @@ function Map(props) {
         a.print();
     }
     //get facility to display on select option tag
-    const [data,setData]=useState([]);
     const getApiData=async()=>{
         try {
             const token=sessionStorage.getItem('token');
@@ -109,11 +105,11 @@ function Map(props) {
                         </div>
                     </div>
                         <div className='select'>
-                            <select class="form-select form-select-md" style={{marginTop:"20px",marginLeft:'10px'}} onChange={(e)=>setLocationSelect(e.target.value)} onClick={handleSelect} aria-label=".form-select-sm example">
+                            <select class="form-select form-select-md" style={{marginTop:"20px",marginLeft:'10px'}} onChange={(e)=>handleSelect(e)} aria-label=".form-select-sm example">
                                 <option style={{fontWeight:"bold"}} selected>Select Facility</option><br/>
                                     {data&&data.map((data)=>(
                                         <>
-                                            <option style={{fontWeight:"bold"}} defaultValue={data.county}>{data.county}&rarr; {data.facility_type_name}</option>
+                                            <option style={{fontWeight:"bold"}} value={data.ward_name}>{data.county}&rarr; {data.facility_type_name}</option>
                                         </>
                                     ))}
                             </select>
